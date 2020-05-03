@@ -46,11 +46,11 @@ function wordGuess(){
       } else{
         correct = answer.guessLetter(input.guess);
         if(correct){
-          console.log("\nCorrect");
+          console.log("\x1b[32m","\nCorrect","\x1b[0m");
         } else{
-          console.log("\nIncorrect");
+          console.log("\x1b[31m","\nIncorrect","\x1b[0m");
           numGuesses--;
-          console.log("\nYou have " + numGuesses + " remaining.")
+          console.log("\nYou have " + numGuesses + " guesses remaining.")
         };
         prevLetters.push(input.guess);
         console.log("\n" + answer.returnString() + "\n");
