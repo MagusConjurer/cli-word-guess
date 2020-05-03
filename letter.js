@@ -5,15 +5,18 @@ function Letter(char) {
   this.isGuessed = false,
   // A function that returns the underlying character if the letter has been guessed, or a placeholder (like an underscore) if the letter has not been guessed
   this.getLetter = function(){
+    if(this.value == " "){
+      this.isGuessed = true;
+    };
     if(this.isGuessed){
       return this.value;
     } else {
       return "_";
-    }
+    };
   },
   // A function that takes a character as an argument and checks it against the underlying character, updating the stored boolean value to true if it was guessed correctly
   this.checkLetter = function(char){
-    if(char == this.value){
+    if(char == this.value.toUpperCase() || char == this.value.toLowerCase()){
       this.isGuessed = true;
     };
   }
