@@ -23,8 +23,8 @@ function Word(str){
   this.guessLetter = function(char){
     var found = false;
     for(var k = 0; k < this.letterArray.length; k++){
-      this.letterArray[k].checkLetter(char);
-      if(this.letterArray[k].isGuessed == true){
+      var check = this.letterArray[k].checkLetter(char);
+      if(check == true){
         found = true;
       };
     };

@@ -18,7 +18,10 @@ function Letter(char) {
   this.checkLetter = function(char){
     if(char == this.value.toUpperCase() || char == this.value.toLowerCase()){
       this.isGuessed = true;
-    };
+      return true;
+    } else{
+      return false;
+    }
   }
 };
 

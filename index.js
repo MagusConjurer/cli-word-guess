@@ -1,7 +1,7 @@
 var Word = require("./word.js");
 var inquirer = require("inquirer");
 
-var numGuesses = 0;
+var numGuesses = 10;
 var prevLetters = [];
 var words = ["apple", "banana"];
 var answer;
@@ -17,14 +17,14 @@ function startGame(){
   prevLetters = [];
   answer = new Word(words[randNum]);
   answer.createWord();
-  console.log(answer.returnString());
+  console.log(answer.returnString() + "\n");
   wordGuess();
 };
 
 function wordGuess(){
   var correct = false;
   var spaces = answer.returnString().includes("_");
-  if(numGuesses < 5 && spaces == true){
+  if(numGuesses > 0 && spaces == true){
     inquirer.prompt([
       {
         name: "guess",
@@ -32,32 +32,36 @@ function wordGuess(){
       }
     ]).then(function(input){
       if(input.guess.length > 1){
-        console.log("Please guess only one letter at a time.");
+        console.log("\nPlease guess only one letter at a time.");
+        console.log("\n" + answer.returnString() + "\n");
         wordGuess();
       } else if(isLetter(input.guess) == false){
-        console.log("Please guess only letters.")
+        console.log("\nPlease guess only letters.")
+        console.log("\n" + answer.returnString() + "\n");
         wordGuess();
       } else if(prevLetters.includes(input.guess)){
-        console.log("You have already guessed that letter.")
+        console.log("\nYou have already guessed that letter.")
+        console.log("\n" + answer.returnString() + "\n");
         wordGuess();
       } else{
         correct = answer.guessLetter(input.guess);
         if(correct){
-          console.log("Correct");
+          console.log("\nCorrect");
         } else{
-          console.log("Incorrect");
+          console.log("\nIncorrect");
+          numGuesses--;
+          console.log("\nYou have " + numGuesses + " remaining.")
         };
         prevLetters.push(input.guess);
-        console.log(answer.returnString());
-        numGuesses++;
+        console.log("\n" + answer.returnString() + "\n");
         wordGuess();
       };
     });
   } else{
     if(spaces == false){
-      console.log("You have guessed the word!");
+      console.log("\nYou have guessed the word!\n");
     } else {
-      console.log("You are out of guesses!");
+      console.log("\nYou are out of guesses!\n");
     }
     inquirer.prompt([
       {
@@ -69,7 +73,7 @@ function wordGuess(){
       if(input.again == true){
         startGame();
       } else{
-        console.log("Thanks for playing.")
+        console.log("\nThanks for playing.")
       }
     })
   }
