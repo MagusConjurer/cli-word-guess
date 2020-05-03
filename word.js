@@ -21,9 +21,14 @@ function Word(str){
   },
   // A function that takes a character as an argument and calls the guess function on each letter object
   this.guessLetter = function(char){
+    var found = false;
     for(var k = 0; k < this.letterArray.length; k++){
       this.letterArray[k].checkLetter(char);
-    }
+      if(this.letterArray[k].isGuessed == true){
+        found = true;
+      };
+    };
+    return found;
   }
 };
 
