@@ -3,6 +3,7 @@ var inquirer = require("inquirer");
 
 var numGuesses = 10;
 var prevLetters = [];
+var prevSelection = [];
 var words = ["apple", "banana"];
 var answer;
 
@@ -13,12 +14,20 @@ function isLetter(str){
 };
 
 function startGame(){
-  var randNum = Math.floor(Math.random() * (words.length - 1));
-  prevLetters = [];
-  answer = new Word(words[randNum]);
-  answer.createWord();
-  console.log(answer.returnString() + "\n");
-  wordGuess();
+  var randNum = Math.floor(Math.random() * (words.length));
+  if(prevSelection.includes(randNum) && prevSelection.length < words.length){
+    startGame();
+  } else if(prevSelection.length == words.length){
+    prevSelection = [];
+    startGame();
+  } else{
+    prevSelection.push(randNum);
+    prevLetters = [];
+    answer = new Word(words[randNum]);
+    answer.createWord();
+    console.log(answer.returnString() + "\n");
+    wordGuess();
+  }
 };
 
 function wordGuess(){
