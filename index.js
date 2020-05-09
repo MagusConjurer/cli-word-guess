@@ -4,7 +4,11 @@ var inquirer = require("inquirer");
 var numGuesses = 10;
 var prevLetters = [];
 var prevSelection = [];
-var words = ["apple", "banana"];
+var words = ["dragong", "castle", "knight", "forest",
+"mountain", "flame", "breath", "scales", "adventure", "battle",
+"beast", "treasure", "creature", "enchanted", "kingdom", "legend",
+"astonishing", "behemoth", "magical", "mythical", "terrifying"
+];
 var answer;
 
 
